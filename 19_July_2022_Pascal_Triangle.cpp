@@ -29,3 +29,33 @@ public:
         return ans;
     }
 };
+
+
+
+// GFG 
+// Ceil in BST:
+
+
+
+int getAns(Node* root, int val, int& ans){
+    if(root == NULL){
+        if(ans != 0){
+            return ans;
+        }
+        
+        return -1;
+    }
+    
+    if(root->data >= val){
+        ans = root->data;
+        return getAns(root->left, val, ans);
+    }
+    else{
+        return getAns(root->right, val, ans);
+    }
+}
+
+int findCeil(Node* root, int input) {
+    int ans = 0;
+    return getAns(root, input, ans);
+}
