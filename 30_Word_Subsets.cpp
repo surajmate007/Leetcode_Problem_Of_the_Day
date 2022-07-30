@@ -48,3 +48,77 @@ public:
         return ans;
     }
 };
+
+
+
+// 29 July GFG
+
+
+class Solution{   
+public:
+    bool isPrime(int n)
+    {
+        for(int i = 2;i*i<=n;i++)
+        {
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+
+    int firingEmployees(vector<int> &arr, int n){
+        vector<int> adjList[n+1];
+        for(int i = 0;i<n; i++){
+            adjList[arr[i]].push_back(i+1);
+        }
+        
+        queue<pair<int,int>> Q;
+        int startNode = adjList[0][0];
+        Q.push({startNode, 0});
+        int cnt = 0;
+        vector<int> visited(n+1, 0);
+        visited[startNode]=1;
+        while(!Q.empty())
+        {
+            pair<int,int> front = Q.front();
+            Q.pop();
+            int node = front.first;
+            int level = front.second;
+            if(node!=startNode)
+            {
+                if(isPrime(node+level)) cnt++;
+            }
+            
+            for(int i = 0;i<adjList[node].size();i++)
+            {
+                if(!visited[adjList[node][i]])
+                {
+                    visited[adjList[node][i]]=1;
+                    Q.push({adjList[node][i], level+1});
+                }
+            }
+        }
+        return cnt;
+    }
+};
+
+
+// GFG 30 JULY:
+
+class Solution{
+  public:
+  
+    char firstRep (string s){
+        unordered_map<char, int> mp;
+        for(int i=0; i<s.length(); i++){
+            mp[s[i]]++;
+        }
+        
+        for(int i=0; i<s.length(); i++){
+            if(mp[s[i]] > 1){
+                return s[i];
+            }
+        }
+        
+        return '#';
+    }
+};
