@@ -1,3 +1,6 @@
+// Leetcode:
+// String concatenation:
+
 class Solution{
     
 public:
@@ -38,5 +41,41 @@ public:
         }
         
         return ans ;
+    }
+};
+
+
+
+// Max length chain:
+// GFG:
+
+/*
+The structure to use is as follows
+struct val{
+	int first;
+	int second;
+};*/
+
+class Solution{
+public:
+    /*You are required to complete this method*/
+    
+    static bool comp(struct val a, struct val b){
+        return a.second < b.second;
+    }
+    
+    int maxChainLen(struct val p[],int n){
+        sort(p, p+n, comp);
+        int last = p[0].second;
+        int ans = 1;
+        
+        for(int i=1; i<n; i++){
+            if(p[i].first > last){
+                ans++;
+                last = p[i].second;
+            }
+        }
+        
+        return ans;
     }
 };
